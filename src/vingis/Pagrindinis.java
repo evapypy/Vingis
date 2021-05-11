@@ -656,6 +656,7 @@ catch(Exception e){System.out.println(e.getMessage());
         jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Šokėjai");
         setPreferredSize(new java.awt.Dimension(1200, 520));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -994,6 +995,7 @@ catch(Exception e){System.out.println(e.getMessage());
     // Button sokejai
     jToggleButton1.setSelected(false);
     Status.Option = "Sokejai";
+    
     setSokejaiTable();
     setSokejaiTableInfo();
     visibleAktyvumas();

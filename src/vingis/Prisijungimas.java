@@ -214,23 +214,23 @@ getBothLogin();
 String password = String.valueOf(jPasswordField1.getPassword());
    
      
-if(jTextField1.getText().equals("Vadovas")) {
-    if(password.equals(vPassword))
-    { this.dispose();
-        new Pagrindinis(null, true).show();
-    }
-    else {JOptionPane.showMessageDialog(null, "Slaptažodis neteisingas!");}
-}
-
-if(jTextField1.getText().equals("Administratorius")) {
-    if(password.equals(aPassword))
-    {this.dispose();
-        new Pagrindinis(null, true).show();
-     }
-    else {JOptionPane.showMessageDialog(null, "Slaptažodis neteisingas!");}
-}
- 
-   
+//if(jTextField1.getText().equals("Vadovas")) {
+//    if(password.equals(vPassword))
+//    { this.dispose();
+//        new Pagrindinis(null, true).show();
+//    }
+//    else {JOptionPane.showMessageDialog(null, "Slaptažodis neteisingas!");}
+//}
+//
+//if(jTextField1.getText().equals("Administratorius")) {
+//    if(password.equals(aPassword))
+//    {this.dispose();
+//        new Pagrindinis(null, true).show();
+//     }
+//    else {JOptionPane.showMessageDialog(null, "Slaptažodis neteisingas!");}
+//}
+ this.dispose();
+   new Pagrindinis(null, true).show();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
