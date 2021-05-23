@@ -16,6 +16,7 @@ public class Status{
     //ID
     public static String SokioID;
     public static String KoncertoID;
+    public static String DalyvioID;
     
     //Visi option
     public static String Option;

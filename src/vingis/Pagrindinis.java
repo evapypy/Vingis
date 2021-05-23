@@ -548,7 +548,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
 while (rs.next()){
     String id = rs.getString("DalyvioID");
 
-    
+    Status.DalyvioID=id;
 DalyvioID=id;
 }}
 catch(Exception e){System.out.println(e.getMessage()); 
@@ -1500,6 +1500,45 @@ jToggleButton6.setSelected(false);
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        
+         if (Status.Option.equals("Sokejai")){
+            
+            try {
+            findDalyvioID();
+               
+           
+              new Pasiekimai(null, true).show();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Nepasirinkote šokėjo!");
+        }
+        }
+         
+         if (Status.Option.equals("Dainininkai")){
+            
+            try {
+            findDalyvioID();
+               
+           
+              new Pasiekimai(null, true).show();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Nepasirinkote šokėjo!");
+        }
+        }
+         
+         
+        if (Status.Option.equals("Muzikantai")){
+            
+            try {
+            findDalyvioID();
+               
+           
+              new Pasiekimai(null, true).show();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Nepasirinkote muzikanto!");
+        }
+        }
+        
+        
         
         if (Status.Option.equals("Koncertai")){
             
