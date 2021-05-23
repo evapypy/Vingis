@@ -48,7 +48,7 @@ String url = "jdbc:sqlite:vingisdb.db";
 Connection con = DriverManager.getConnection(url);
 Statement st = con.createStatement();
 findSokioID();
-String sqlrequest = "select * from dalyvauja as da, sokis as s, dalyvis as d where s.SokioID=da.SokioID and d.DalyvioID=da.DalyvioID and da.SokioID='"+SokioID+"' and da.Dalyvavimo_Data='"+Status.Data+"'  and d.Lytis='V' order by da.Poros_Nr asc"   ;                 
+String sqlrequest = "select * from dalyvauja as da, sokis as s, dalyvis as d where s.SokioID=da.SokioID and d.DalyvioID=da.DalyvioID and da.SokioID='"+SokioID+"' and da.Dalyvavimo_Data='"+Status.Data+"'  and d.Lytis='V' and d.Zanras='S' order by da.Poros_Nr asc"   ;                 
 //String sqlrequest = "select  Pavadinimas, Proga, Vieta,Data from koncertas order by Data desc";
 ResultSet rs = st.executeQuery(sqlrequest);
 
@@ -96,7 +96,7 @@ String url = "jdbc:sqlite:vingisdb.db";
 Connection con = DriverManager.getConnection(url);
 Statement st = con.createStatement();
 findSokioID();
-String sqlrequest = "select * from dalyvauja as da, sokis as s, dalyvis as d where s.SokioID=da.SokioID and d.DalyvioID=da.DalyvioID and da.SokioID='"+SokioID+"' and da.Dalyvavimo_Data='"+Status.Data+"' and d.Lytis='M'   order by da.Poros_Nr asc"   ;                 
+String sqlrequest = "select * from dalyvauja as da, sokis as s, dalyvis as d where s.SokioID=da.SokioID and d.DalyvioID=da.DalyvioID and da.SokioID='"+SokioID+"' and da.Dalyvavimo_Data='"+Status.Data+"' and d.Lytis='M' and d.Zanras='S'  order by da.Poros_Nr asc"   ;                 
 //String sqlrequest = "select  Pavadinimas, Proga, Vieta,Data from koncertas order by Data desc";
 ResultSet rs = st.executeQuery(sqlrequest);
 
@@ -410,7 +410,7 @@ Statement st = con.createStatement();
 String sqlrequest = 
         "select da.SokioID , da.DalyvioID , da.Dalyvavimo_Data , da.Poros_Nr "
         + "from Dalyvauja as da, Dalyvis as d  "
-        + "where da.DalyvioID=d.DalyvioID and da.SokioID='"+SokioID+"' and da.Dalyvavimo_Data='"+Status.Data+"' and d.Lytis='M' order by da.Poros_Nr ASC";
+        + "where da.DalyvioID=d.DalyvioID and da.SokioID='"+SokioID+"' and da.Dalyvavimo_Data='"+Status.Data+"' and d.Lytis='M' and d.Zanras='S' order by da.Poros_Nr ASC";
 ResultSet rs = st.executeQuery(sqlrequest);
 int number = 1;
 

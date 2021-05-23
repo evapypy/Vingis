@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -53,7 +54,8 @@ public class Pagrindinis extends javax.swing.JDialog {
          checkForVisablitiy();
          Status.Lytis="";
          setAdminTools();
-    
+         jButton5.setVisible(false);
+        Pagrindinis.this.setTitle("Šokėjų informacija");
         
 
         
@@ -67,23 +69,14 @@ public class Pagrindinis extends javax.swing.JDialog {
         jToggleButton10.setVisible(false);
         jToggleButton11.setVisible(false);
         jMenu4.setVisible(false);
+        jToggleButton6.setVisible(false);
     }}
     
     
     
     
     
-          JFrame fr = new JFrame ("");
-            FileDialog fd = new FileDialog(fr,"Open", FileDialog.LOAD);
-            
-            private ImageIcon format=null;
-
-private  String d ;
-
-
-byte[] Persom_image=null;
-
- BufferedImage inputImage;
+        
     
     
     
@@ -174,7 +167,7 @@ String aktyvumoCheck= "";
     
     
     
-String sqlrequest = "select metai,vardas,pavarde,gimimo_data,el_pastas,gimtasis_miestas from dalyvis where Zanras = 'S' "+aktyvumoCheck+" "+lytis()+"  order by metai desc, vardas asc, pavarde asc";
+String sqlrequest = "select metai,vardas,pavarde,gimimo_data,el_pastas,Tel_Nr from dalyvis where Zanras = 'S' "+aktyvumoCheck+" "+lytis()+"  order by metai desc, vardas asc, pavarde asc";
 ResultSet rs = st.executeQuery(sqlrequest);
 
 while (rs.next()){
@@ -183,7 +176,7 @@ while (rs.next()){
     String pavarde = rs.getString("pavarde");
     String gimimoData = rs.getString("gimimo_data");
     String elPastas = rs.getString("el_pastas");
-    String gimtasisMiestas = rs.getString("gimtasis_miestas");
+    String gimtasisMiestas = rs.getString("Tel_Nr");
     
 String tbData[] = {metai,vardas,pavarde,gimimoData,elPastas,gimtasisMiestas};
 DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
@@ -205,7 +198,7 @@ String aktyvumoCheck= "";
     if (jCheckBox1.isSelected()){aktyvumoCheck="and Aktyvumas=1";}
     else aktyvumoCheck = "";
 
-String sqlrequest = "select metai,vardas,pavarde,gimimo_data,el_pastas,gimtasis_miestas,Instrumentas from dalyvis where  Zanras = 'M'"+aktyvumoCheck+" "+lytis()+" order by metai desc, vardas asc, pavarde asc";
+String sqlrequest = "select metai,vardas,pavarde,gimimo_data,el_pastas,Tel_Nr,Instrumentas from dalyvis where  Zanras = 'M'"+aktyvumoCheck+" "+lytis()+" order by metai desc, vardas asc, pavarde asc";
 ResultSet rs = st.executeQuery(sqlrequest);
 
 while (rs.next()){
@@ -214,7 +207,7 @@ while (rs.next()){
     String pavarde = rs.getString("pavarde");
     String gimimoData = rs.getString("gimimo_data");
     String elPastas = rs.getString("el_pastas");
-    String gimtasisMiestas = rs.getString("gimtasis_miestas");
+    String gimtasisMiestas = rs.getString("Tel_Nr");
     String instrumentas = rs.getString("Instrumentas");
     
 String tbData[] = {metai,vardas,pavarde,gimimoData,elPastas,gimtasisMiestas,instrumentas};
@@ -265,7 +258,7 @@ String aktyvumoCheck= "";
     if (jCheckBox1.isSelected()){aktyvumoCheck="and Aktyvumas=1";}
     else aktyvumoCheck = "";
 
-String sqlrequest = "select metai,vardas,pavarde,gimimo_data,el_pastas,gimtasis_miestas from dalyvis where  Zanras = 'D' "+aktyvumoCheck +"  "+lytis()+"order by metai desc, vardas asc, pavarde asc";
+String sqlrequest = "select metai,vardas,pavarde,gimimo_data,el_pastas,Tel_Nr from dalyvis where  Zanras = 'D' "+aktyvumoCheck +"  "+lytis()+"order by metai desc, vardas asc, pavarde asc";
 ResultSet rs = st.executeQuery(sqlrequest);
 
 while (rs.next()){
@@ -274,7 +267,7 @@ while (rs.next()){
     String pavarde = rs.getString("pavarde");
     String gimimoData = rs.getString("gimimo_data");
     String elPastas = rs.getString("el_pastas");
-    String gimtasisMiestas = rs.getString("gimtasis_miestas");
+    String gimtasisMiestas = rs.getString("Tel_Nr");
     
 String tbData[] = {metai,vardas,pavarde,gimimoData,elPastas,gimtasisMiestas};
 DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
@@ -329,7 +322,7 @@ catch(Exception e){System.out.println(e.getMessage());
 
             },
             new String [] {
-                "Metai", "Vardas", "Pavardė", "Gimimo data", "El. Paštas", "Gimtasis miestas"
+                "Metai", "Vardas", "Pavardė", "Gimimo data", "El. Paštas", "Tel. Nr."
             }
         ) {
             Class[] types = new Class [] {
@@ -355,7 +348,7 @@ jButton3.setText("Šokėjo pasiekimai");
 
             },
             new String [] {
-                "Metai", "Vardas", "Pavardė", "Gimimo data", "El. Paštas", "Gimtasis miestas", "Instrumentas"
+                "Metai", "Vardas", "Pavardė", "Gimimo data", "El. Paštas", "Tel. Nr.", "Instrumentas"
             }
         ) {
             Class[] types = new Class [] {
@@ -380,7 +373,7 @@ jButton3.setText("Muzikanto pasiekimai");
 
             },
             new String [] {
-                "Metai", "Vardas", "Pavardė", "Gimimo data", "El. Paštas", "Gimtasis miestas"
+                "Metai", "Vardas", "Pavardė", "Gimimo data", "El. Paštas", "Tel. Nr."
             }
         ) {
             Class[] types = new Class [] {
@@ -404,7 +397,7 @@ jButton3.setText("Dainininko pasiekimai");
 
             },
             new String [] {
-                "Šokio pavadinimas", "Merginų kiekis", "Vaikinų kiekis", "Šokio trukmė","Sukūrimo metai"
+                "Šokio pavadinimas", "Merginų kiekis", "Vaikinų kiekis", "Kūrinio trukmė","Sukūrimo metai"
             }
         ) {
             Class[] types = new Class [] {
@@ -489,6 +482,7 @@ while (rs.next()){
 
     
 KoncertoID=id;
+Status.KoncertoID=id;
 }
 }
 catch(Exception e){System.out.println(e.getMessage()); 
@@ -523,6 +517,7 @@ while (rs.next()){
 
     
 SokioID=id;
+Status.SokioID=id;
 }
 }
 catch(Exception e){System.out.println(e.getMessage()); 
@@ -602,11 +597,249 @@ catch(Exception e){System.out.println(e.getMessage());
     }
   
   
+  void createKoncertasExcel(){
+      
+      
+      FileOutputStream excelFOU = null;
+            BufferedOutputStream excelBOU = null;
+            XSSFWorkbook excelJTableExporter=null;
+        
+            String koncertoData="";
+            String koncertoPavadinimas="";
+        
+        JFileChooser excelFileChooser = new JFileChooser();
+        excelFileChooser.setDialogTitle("Išsaugojama kaip");
+     
+        FileNameExtensionFilter fnef= new FileNameExtensionFilter("EXCEL FILES","xls","xlsx","xlsm");
+        excelFileChooser.setFileFilter(fnef);
+        int excelChooser = excelFileChooser.showSaveDialog(null);
+        int z=0;
+        if(excelChooser==JFileChooser.APPROVE_OPTION){
+            
+            
+            //*************************************************************************
+             
+      excelJTableExporter = new XSSFWorkbook();
+                XSSFSheet excelSheet = excelJTableExporter.createSheet("Koncerto informacija");
+             XSSFRow excelRow= excelSheet.createRow(0);
+                 XSSFCell excelCell = excelRow.createCell(1);
+                  excelCell.setCellValue("Koncerto pavadinimas:");
+            
+            
+//**************************************************************************************
+            try {
+                
+           
+                
+                 try{
+String url = "jdbc:sqlite:vingisdb.db";
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+
+
+String sqlrequest = "select * from Koncertas where KoncertoID='"+KoncertoID+"'";
+ResultSet rs = st.executeQuery(sqlrequest);
+
+                  while (rs.next()){                
+                   excelCell = excelRow.createCell(3);excelCell.setCellValue(rs.getString("Pavadinimas"));
+                   excelRow= excelSheet.createRow(1);
+                   koncertoPavadinimas=rs.getString("Pavadinimas");
+                   excelCell = excelRow.createCell(1);excelCell.setCellValue("Koncerto proga:");
+                   excelCell = excelRow.createCell(3);excelCell.setCellValue(rs.getString("Proga"));
+                   excelRow= excelSheet.createRow(2);
+                    excelCell = excelRow.createCell(1);excelCell.setCellValue("Koncerto vieta:");
+                   excelCell = excelRow.createCell(3);excelCell.setCellValue(rs.getString("Vieta"));
+                   excelRow= excelSheet.createRow(3);
+                    excelCell = excelRow.createCell(1);excelCell.setCellValue("Koncerto data:");
+                   excelCell = excelRow.createCell(3);excelCell.setCellValue(rs.getString("Data"));
+                   koncertoData=rs.getString("Data");
+                }
+                  
+                 
+                 }catch(Exception e){System.out.println(e.getMessage());}           
+                  
+                 excelRow= excelSheet.createRow(5);
+ excelCell = excelRow.createCell(0);excelCell.setCellValue("Nr:");
+ excelCell = excelRow.createCell(1);excelCell.setCellValue("Koncerto programa:");     
+                
+                
+                
+ try{
+String url = "jdbc:sqlite:vingisdb.db";
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+
+
+String sqlrequest = "select  Sokio_Pavadinimas from Sokis as s, vyksta as v, koncertas as k where k.koncertoID = v.koncertoID and s.sokioID = v.SokioID and k.koncertoID='"+KoncertoID+"' order by PasirodymoNr ASC";
+int skaiciuokle=1;
+ResultSet rs = st.executeQuery(sqlrequest);
+z=6;excelRow= excelSheet.createRow(z);
+                  while (rs.next()){        
+                      
+                   excelCell = excelRow.createCell(0);excelCell.setCellValue(skaiciuokle);
+                   excelCell = excelRow.createCell(1);excelCell.setCellValue(rs.getString("Sokio_Pavadinimas"));
+                  z++;
+                  skaiciuokle++;
+                   excelRow= excelSheet.createRow(z);
+                  
+                }
+                  
+                 
+                 }catch(Exception e){System.out.println(e.getMessage());}  
+ 
+
+ z=z+1;
+  excelRow= excelSheet.createRow(z);
+ excelCell = excelRow.createCell(1);excelCell.setCellValue("Koncerto dalyviai:");
+ z=z+1;
+  excelRow= excelSheet.createRow(z);
+ excelCell = excelRow.createCell(0);excelCell.setCellValue("Nr:");
+ excelCell = excelRow.createCell(1);excelCell.setCellValue("Pavardė:");
+  excelCell = excelRow.createCell(2);excelCell.setCellValue("Vardas:");    
+ 
+z++;
+ try{
+String url = "jdbc:sqlite:vingisdb.db";
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+
+
+String sqlrequest = "select distinct pavarde,vardas from dalyvis as d, dalyvauja as da, sokis as s, vyksta as v, koncertas as k where d.DalyvioID=da.DalyvioID and s.SokioID=da.SokioID and s.SokioID=v.SokioID and k.KoncertoID=v.KoncertoID and k.koncertoID='"+KoncertoID+"' order by  pavarde asc, vardas asc";
+int skaiciuokle=1;
+ResultSet rs = st.executeQuery(sqlrequest);
+excelRow= excelSheet.createRow(z);
+                  while (rs.next()){        
+                      
+                   excelCell = excelRow.createCell(0);excelCell.setCellValue(skaiciuokle);
+                   excelCell = excelRow.createCell(1);excelCell.setCellValue(rs.getString("Pavarde"));
+                   excelCell = excelRow.createCell(2);excelCell.setCellValue(rs.getString("Vardas"));
+                  z++;
+                  skaiciuokle++;
+                   excelRow= excelSheet.createRow(z);
+                  
+                }
+                  
+                 
+                 }catch(Exception e){System.out.println(e.getMessage());}  
+ 
+ // Pirmo lapo pabaiga ****************************************************************************************************************************************
+ //Sudarinejam sheetus
+ int koncertuKiekis=0;
+ try{
+String url = "jdbc:sqlite:vingisdb.db";
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+
+
+String sqlrequest = "select distinct Sokio_Pavadinimas from dalyvis as d, dalyvauja as da, sokis as s, vyksta as v, koncertas as k where d.DalyvioID=da.DalyvioID and s.SokioID=da.SokioID and s.SokioID=v.SokioID and k.KoncertoID=v.KoncertoID and k.koncertoID='"+KoncertoID+"' order by  v.PasirodymoNr asc";
+ResultSet rs = st.executeQuery(sqlrequest);
+
+                  while (rs.next()){        
+                   excelJTableExporter.createSheet(rs.getString("Sokio_Pavadinimas"));
+                  koncertuKiekis++;
+                }
+                  
+                 
+                 }catch(Exception e){System.out.println(e.getMessage());}  
+ 
+ 
+                
+ 
+ 
+ for(int i=1;i<=koncertuKiekis;i++)
+ {
+    excelSheet = excelJTableExporter.getSheetAt(i);
+     
+      excelRow= excelSheet.createRow(0);
+      excelCell = excelRow.createCell(0);excelCell.setCellValue("Poros nr:");
+      excelCell = excelRow.createCell(1);excelCell.setCellValue("Vaikinas");
+      excelCell = excelRow.createCell(4);excelCell.setCellValue("Mergina");
+     
+     try{
+String url = "jdbc:sqlite:vingisdb.db";
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+
+int q=1;
+String sqlrequest = "select d.vardas, d.pavarde, da.Poros_Nr, d.lytis from dalyvis as d, dalyvauja as da, sokis as s, vyksta as v, koncertas as k where d.DalyvioID=da.DalyvioID and s.SokioID=da.SokioID and s.SokioID=v.SokioID and k.KoncertoID=v.KoncertoID and da.Dalyvavimo_Data=k.Data and k.koncertoID='"+KoncertoID+"' and Sokio_Pavadinimas='"+excelJTableExporter.getSheetName(i)+"' and d.Zanras='S' order by da.Poros_Nr ASC";
+ResultSet rs = st.executeQuery(sqlrequest);
+int porosnr=0;
+                  while (rs.next()){    
+                      if(porosnr!=rs.getInt("Poros_Nr")){
+                   porosnr= rs.getInt("Poros_Nr"); 
+                   excelRow= excelSheet.createRow(q);
+                   q++;
+                   excelCell = excelRow.createCell(0);excelCell.setCellValue(porosnr);
+                           }
+                  if(rs.getString("Lytis").equals("V")){
+                      excelCell = excelRow.createCell(1);excelCell.setCellValue(rs.getString("Vardas"));
+                      excelCell = excelRow.createCell(2);excelCell.setCellValue(rs.getString("Pavarde"));
+                  }
+                  if(rs.getString("Lytis").equals("M")){
+                      excelCell = excelRow.createCell(4);excelCell.setCellValue(rs.getString("Vardas"));
+                      excelCell = excelRow.createCell(5);excelCell.setCellValue(rs.getString("Pavarde"));
+                  }    
+                      
+                }
+                  
+                 
+                 }catch(Exception e){System.out.println(e.getMessage());}  
+      
+      
+      
+      
+      
+      
+     
+     
+     
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                excelFOU = new FileOutputStream(excelFileChooser.getSelectedFile()+".xlsx");
+                excelBOU = new BufferedOutputStream(excelFOU);
+                excelJTableExporter.write(excelBOU);
+                JOptionPane.showMessageDialog(null, "Duomenys iškelti");
+                
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }   catch (IOException ex) {
+                    ex.printStackTrace();
+                } finally {
+                try {
+                    
+                    if (excelBOU!=null){
+                       excelBOU.close(); 
+                    }
+                    
+                    
+                    
+                    if (excelFOU!=null){
+                       excelFOU.close(); 
+                    }
+                    
+                    if (excelJTableExporter!=null){
+                       excelJTableExporter.close(); 
+                    }
+                    
+                    
+                } catch (IOException ex) {//error?
+                    ex.printStackTrace();
+                }
+            }
+            
+            
+        }
   
   
-  
-  
-  
+  }
   
     /**
      * This method is called from within the constructor to initialize the form.
@@ -636,6 +869,7 @@ catch(Exception e){System.out.println(e.getMessage());
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -646,6 +880,8 @@ catch(Exception e){System.out.println(e.getMessage());
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jCheckBox1 = new javax.swing.JCheckBoxMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -689,7 +925,7 @@ catch(Exception e){System.out.println(e.getMessage());
             }
         });
 
-        jToggleButton4.setText("Šokiai");
+        jToggleButton4.setText("Kūriniai");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
@@ -703,6 +939,7 @@ catch(Exception e){System.out.println(e.getMessage());
             }
         });
 
+        jToggleButton6.setBackground(new java.awt.Color(255, 51, 51));
         jToggleButton6.setText("Finansai");
         jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -836,6 +1073,13 @@ catch(Exception e){System.out.println(e.getMessage());
             }
         });
 
+        jButton5.setText("Papildoma koncerto informacija");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Sistema");
 
         jMenuItem1.setText("Atsijungti");
@@ -890,6 +1134,15 @@ catch(Exception e){System.out.println(e.getMessage());
             }
         });
         jMenu2.add(jMenuItem5);
+        jMenu2.add(jSeparator3);
+
+        jMenuItem8.setText("Pasirinktą koncertą");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
@@ -960,11 +1213,13 @@ catch(Exception e){System.out.println(e.getMessage());
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton3)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
@@ -980,7 +1235,8 @@ catch(Exception e){System.out.println(e.getMessage());
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton4)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
                 .addGap(48, 61, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -995,10 +1251,11 @@ catch(Exception e){System.out.println(e.getMessage());
     // Button sokejai
     jToggleButton1.setSelected(false);
     Status.Option = "Sokejai";
-    
+    Pagrindinis.this.setTitle("Šokėjų informacija");
     setSokejaiTable();
     setSokejaiTableInfo();
     visibleAktyvumas();
+    jButton5.setVisible(false);
     jButton1.setVisible(true);
     visiblePasiekimai();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
@@ -1007,6 +1264,8 @@ catch(Exception e){System.out.println(e.getMessage());
     //Button Muzikantai
     jToggleButton2.setSelected(false);
     Status.Option = "Muzikantai";
+    jButton5.setVisible(false);
+    Pagrindinis.this.setTitle("Muzikantų informacija");
     setMuzikantaiTable();
     setMuzikantaiTableInfo();
     jButton1.setVisible(true);
@@ -1018,6 +1277,8 @@ catch(Exception e){System.out.println(e.getMessage());
     //Button Dainininkai
     jToggleButton3.setSelected(false);
     Status.Option = "Dainininkai";
+    jButton5.setVisible(false);
+    Pagrindinis.this.setTitle("Dainininkų informacija");
     setDainininkaiTable();
     setDainininkaiTableInfo();
     jButton1.setVisible(true);
@@ -1028,10 +1289,12 @@ catch(Exception e){System.out.println(e.getMessage());
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
      //Button Sokiai
      jToggleButton4.setSelected(false);
+     jButton5.setVisible(false);
+     Pagrindinis.this.setTitle("Šokių informacija");
      Status.Option = "Sokiai";
      setSokiaiTable();
      setSokiaiTableInfo();
-     jButton1.setVisible(false);
+    
      hideAktyvumas();
      hidePasiekimai();
     }//GEN-LAST:event_jToggleButton4ActionPerformed
@@ -1040,9 +1303,10 @@ catch(Exception e){System.out.println(e.getMessage());
     //Button Koncertai
     jToggleButton5.setSelected(false);
     Status.Option = "Koncertai";
+    Pagrindinis.this.setTitle("Koncertų informacija");
     setKoncertaiTable();
     setKoncertaiTableInfo();
-    jButton1.setVisible(true);
+    jButton5.setVisible(true);
     hideAktyvumas();
     visiblePasiekimai();
     }//GEN-LAST:event_jToggleButton5ActionPerformed
@@ -1186,11 +1450,13 @@ jToggleButton6.setSelected(false);
         // Button Update
         if(Status.Option.equals("Sokiai")){
             try {
+                findSokioID();
+                Status.Action="update";
             int row = jTable1.getSelectedRow();
             Status.Metai = (jTable1.getModel().getValueAt(row, 0).toString());
             Status.Vardas = (jTable1.getModel().getValueAt(row, 1).toString());
             Status.Pavarde = (jTable1.getModel().getValueAt(row, 2).toString());
-            this.setVisible(false);
+            
             new skInsertField (null, true).show();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Nepasirinkote šokio!");
@@ -1944,7 +2210,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
                 
                 XSSFRow excelRow= excelSheet.createRow(0);
                  XSSFCell excelCell = excelRow.createCell(0);
-                  excelCell.setCellValue("Vaikinai:");
+                  excelCell.setCellValue("Šokėjai vaikinai:");
                   
                    excelRow= excelSheet.createRow(1);
                  excelCell = excelRow.createCell(0);excelCell.setCellValue("Metai");
@@ -2015,7 +2281,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
 z++;
 excelRow= excelSheet.createRow(z);
                 excelCell = excelRow.createCell(0);
-                  excelCell.setCellValue("Merginos:");   
+                  excelCell.setCellValue("Šokėjos merginos:");   
                  z++;
                  
                       excelRow= excelSheet.createRow(z);
@@ -2129,7 +2395,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
 
 
  
-                
+                z++;
                     
                     
     while (rs.next()){                
@@ -2208,7 +2474,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
 
  
                 
-                    
+                    z++;
                     
     while (rs.next()){                
                     
@@ -2361,7 +2627,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
                 
                 XSSFRow excelRow= excelSheet.createRow(0);
                  XSSFCell excelCell = excelRow.createCell(0);
-                  excelCell.setCellValue("Vaikinai:");
+                  excelCell.setCellValue("Šokėjai vaikinai:");
                   
                    excelRow= excelSheet.createRow(1);
                  excelCell = excelRow.createCell(0);excelCell.setCellValue("Metai");
@@ -2432,7 +2698,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
 z++;
 excelRow= excelSheet.createRow(z);
                 excelCell = excelRow.createCell(0);
-                  excelCell.setCellValue("Merginos:");   
+                  excelCell.setCellValue("Šokėjos merginos:");   
                  z++;
                  
                       excelRow= excelSheet.createRow(z);
@@ -2508,7 +2774,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
                  
                    excelRow= excelSheet.createRow(z);
                  excelCell = excelRow.createCell(0);
-                  excelCell.setCellValue("Aktyvūs muzikantai:");
+                  excelCell.setCellValue("Muzikantai:");
                   z++;
                    excelRow= excelSheet.createRow(z);
                  excelCell = excelRow.createCell(0);excelCell.setCellValue("Metai");
@@ -2546,7 +2812,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
 
 
  
-                
+                z++;
                     
                     
     while (rs.next()){                
@@ -2586,7 +2852,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
                  
                    excelRow= excelSheet.createRow(z);
                   excelCell = excelRow.createCell(0);
-                  excelCell.setCellValue("Aktyvūs dainininkai:");
+                  excelCell.setCellValue("Dainininkai:");
                   z++;
                    excelRow= excelSheet.createRow(z);
                  excelCell = excelRow.createCell(0);excelCell.setCellValue("Metai");
@@ -2625,7 +2891,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
 
  
                 
-                    
+                    z++;
                     
     while (rs.next()){                
                     
@@ -2732,7 +2998,9 @@ ResultSet rs = st.executeQuery(sqlrequest);
             
         }
         
+     
         
+    
         
         
         
@@ -2745,6 +3013,37 @@ ResultSet rs = st.executeQuery(sqlrequest);
         
         
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+         if(Status.Option.equals("Koncertai")){
+            try {
+                findKoncertoID();
+                Status.Action="update";
+       
+            new skInsertField (null, true).show();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Nepasirinkote šokio!");
+        }
+        
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+          try {
+              if(Status.Option.equals("Koncertai")){
+                int row = jTable1.getSelectedRow();
+        String Pav =  jTable1.getModel().getValueAt(row, 0).toString();
+            findKoncertoID();
+            createKoncertasExcel();
+              }
+              else JOptionPane.showMessageDialog(null, "Nepasirinkote koncerto iš koncertų skilties");
+        } catch (Exception e) {
+              System.out.println("nepavyko");
+        }
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2795,6 +3094,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBoxMenuItem jCheckBox1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -2808,6 +3108,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
@@ -2815,6 +3116,7 @@ ResultSet rs = st.executeQuery(sqlrequest);
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     public static javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton10;

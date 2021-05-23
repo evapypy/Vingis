@@ -27,7 +27,7 @@ public class skInsertField extends javax.swing.JDialog {
         if(Status.Option.equals("Sokiai")){setSokejasUpdateFields();}
         else if (Status.Option.equals("Koncertai")){setKoncertaiUpdateFields();}
         fillFields();
-        
+        if(Status.Action.equals("update")) jButton2.setText("Atnaujinti");
         
         
     }
@@ -67,18 +67,62 @@ catch(Exception e){System.out.println(e.getMessage());
     
     
    void  fillFields(){
-       if(Status.Option.equals("Sokiai")){
-       
-       
-       
-       
+       if(Status.Option.equals("Sokiai")&& Status.Action.equals("update")){
+        try {
+            String url = "jdbc:sqlite:vingisdb.db";
+            Connection con = DriverManager.getConnection(url);
+
+            String query = "select * from Sokis where SokioID='"+Status.SokioID+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+           while (rs.next()) {
+               String pavadinimas = rs.getString("Sokio_Pavadinimas");
+               String vaik = rs.getString("Vaikinu_Kiekis");
+               String merg = rs.getString("Merginu_Kiekis");
+               String truk = rs.getString("Sokio_Trukme");
+               String suk = rs.getString("Sukurimo_Metai");
+               
+               jTextField1.setText(pavadinimas);
+               jTextField2.setText(vaik);
+               jTextField3.setText(merg);
+               jTextField4.setText(truk);
+               jTextField5.setText(suk);
+               
        }
+        }catch (Exception e) {System.out.println(e);
+        
+    }
+    }
        
        
        
        
-       else if (Status.Option.equals("Koncertai")){
        
+       else if (Status.Option.equals("Koncertai")&& Status.Action.equals("update")){
+       try {
+            String url = "jdbc:sqlite:vingisdb.db";
+            Connection con = DriverManager.getConnection(url);
+
+            String query = "select * from Koncertas where KoncertoID='"+Status.KoncertoID+"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+           while (rs.next()) {
+               String pavadinimas = rs.getString("Pavadinimas");
+               String vaik = rs.getString("Proga");
+               String merg = rs.getString("Vieta");
+               String truk = rs.getString("Data");
+               
+               
+               jTextField1.setText(pavadinimas);
+               jTextField2.setText(vaik);
+               jTextField3.setText(merg);
+               jTextField4.setText(truk);
+              
+               
+       }
+        }catch (Exception e) {System.out.println(e);
+        
+    }
        
        }
        
@@ -92,9 +136,9 @@ catch(Exception e){System.out.println(e.getMessage());
         jLabel5.setVisible(false);
         
          jLabel1.setText("Koncerto Pavadinimas*:");
-        jLabel2.setText("Koncerto data*:");
+        jLabel4.setText("Koncerto data*:");
         jLabel3.setText("Koncerto vieta:");
-        jLabel4.setText ("Koncerto proga:");
+        jLabel2.setText ("Koncerto proga:");
        
         jLabel6.setText("Koncerto pridėjimas");
     }
@@ -106,7 +150,7 @@ catch(Exception e){System.out.println(e.getMessage());
          jLabel1.setText("Šokio pavadinimas*:");
         jLabel2.setText("Vaikinų kiekis*:");
         jLabel3.setText("Merginų kiekis*:");
-        jLabel4.setText("Šokio trukmė (min)*:");
+        jLabel4.setText("Kūrinio trukmė (min)*:");
         jLabel5.setText("Sukūrimo metai:");
         jLabel6.setText("Šokio pridėjimas");
     }
@@ -150,7 +194,7 @@ catch(Exception e){System.out.println(e.getMessage());
             Connection con = DriverManager.getConnection(url);
             Statement st = con.createStatement();
             
-            String sqlrequest = "INSERT INTO Koncertas (Pavadinimas,Data,Proga,Vieta)VALUES ('"+ sokioPavadinimas+
+            String sqlrequest = "INSERT INTO Koncertas (Pavadinimas,Proga,Data,Vieta)VALUES ('"+ sokioPavadinimas+
                     "','" + vaikinuKiekis +"','" + merginuKiekis +"','" + sokioTrukme + "')";
             
             st.executeUpdate(sqlrequest);
@@ -192,7 +236,31 @@ tblModel.addRow(tbData);
 catch(Exception e){System.out.println(e.getMessage()); 
 }}    
     
-    
+    void updateSokis(){
+        try{
+String url = "jdbc:sqlite:vingisdb.db";
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+String sqlrequest = "update Sokis set Sokio_Pavadinimas='"+jTextField1.getText()+"' , Vaikinu_Kiekis='"+jTextField2.getText()+"' , Merginu_Kiekis='"+jTextField3.getText()+"' ,"
+        + " Sokio_Trukme='"+jTextField4.getText()+"' ,Sukurimo_Metai='"+jTextField5.getText()+"' where SokioID='"+Status.SokioID+"'";
+ st.executeUpdate(sqlrequest);
+
+}
+catch(Exception e){System.out.println(e.getMessage()); 
+}}    
+    void updateKoncertas(){
+        try{
+String url = "jdbc:sqlite:vingisdb.db";
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+String sqlrequest = "update Koncertas set Pavadinimas='"+jTextField1.getText()+"' , Proga='"+jTextField2.getText()+"' , Vieta='"+jTextField3.getText()+"' ,"
+        + " Data='"+jTextField4.getText()+"'  where KoncertoID='"+Status.KoncertoID+"'";
+ st.executeUpdate(sqlrequest);
+
+}
+catch(Exception e){System.out.println(e.getMessage()); 
+}
+    }
     
     
     /**
@@ -347,16 +415,18 @@ catch(Exception e){System.out.println(e.getMessage());
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // add/update button
         //Status.Action
+        if(Status.Option.equals("Sokiai")&& Status.Action.equals("update")){
+            updateSokis();setSokiaiTableInfo();
+        }
+        if(Status.Option.equals("Koncertai")&& Status.Action.equals("update")){
+            updateKoncertas();setKoncertaiTableInfo();this.dispose();
+        }
+        if (Status.Option.equals("Sokiai")&& Status.Action.equals("Add")){
         
-        if (Status.Option.equals("Sokiai")){
-        if(Status.Action.equals("Add")){
            if(jTextField1.getText().equals("")){}else addSokis();setSokiaiTableInfo();
-        }}
-        if (Status.Option.equals("Koncertai")){
-            if(Status.Action.equals("Add")){
-            addKoncertas();setKoncertaiTableInfo(); 
-            }
-            
+        }
+        if (Status.Option.equals("Koncertai")&& Status.Action.equals("Add")){
+            addKoncertas();setKoncertaiTableInfo();this.dispose();
         }
         
         

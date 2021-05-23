@@ -510,7 +510,47 @@ st.executeUpdate(sqlrequest);
     }
     
     
+    void deleteDainininkasFromKoncertas(){
+       
+        
+            int row = jTable4.getSelectedRow();
+            
+            String Pavadinimas = (jTable4.getModel().getValueAt(row, 0).toString());
+            
     
+            
+             int tarpas = Pavadinimas.indexOf(" ");
+            int dvitaskis=Pavadinimas.indexOf(":");
+            int visasIlgis=Pavadinimas.length();
+           
+         dalyvioNr =Pavadinimas.substring(0,dvitaskis);
+           dalyvioVardas=Pavadinimas.substring(dvitaskis+1, tarpas);
+           dalyvioPavarde=Pavadinimas.substring(tarpas+1, visasIlgis);
+
+            
+            findDalyvioID(dal);
+     
+          
+        
+           
+           
+          try { 
+                String url = "jdbc:sqlite:vingisdb.db";
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+
+String sqlrequest = "Delete from Dalyvauja where DalyvioID='"+DalyvioID+"'  and Dalyvavimo_Data='"+Status.Data+"' ";
+st.executeUpdate(sqlrequest);
+
+
+
+            }catch(Exception e){System.out.println(e.getMessage()); 
+}
+       
+       
+       
+        
+    }
     
     
     
@@ -834,6 +874,8 @@ st.executeUpdate(sqlrequest);
         System.out.println("DALid="+DalyvioID);
         findVisusSokius();
         insertInfo();
+        setKDainininkaiTableInfo();
+        setKMuzikantaiTableInfo();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -849,6 +891,10 @@ st.executeUpdate(sqlrequest);
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         dal="dai1";
+        deleteDainininkasFromKoncertas();
+          setDainininkaiTableInfo();
+         setKDainininkaiTableInfo();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTable2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable2FocusGained

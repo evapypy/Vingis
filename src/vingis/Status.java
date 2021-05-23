@@ -13,7 +13,9 @@ public class Status{
     //Login
     public static String loginName;
     public static String changeWhat;
-    
+    //ID
+    public static String SokioID;
+    public static String KoncertoID;
     
     //Visi option
     public static String Option;
