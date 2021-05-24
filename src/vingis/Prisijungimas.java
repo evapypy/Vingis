@@ -208,29 +208,33 @@ catch(Exception e){System.out.println(e.getMessage());
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Button login
+        //PRISIJUNGIMAI: user:Vadovas          pass:vingis
+        //               user:Administratorius pass:admin
+        
+        
+        
 Status.Option = "Sokejai";
 Status.loginName=jTextField1.getText();
 getBothLogin();
 String password = String.valueOf(jPasswordField1.getPassword());
    
      
-//if(jTextField1.getText().equals("Vadovas")) {
-//    if(password.equals(vPassword))
-//    { this.dispose();
-//        new Pagrindinis(null, true).show();
-//    }
-//    else {JOptionPane.showMessageDialog(null, "Slaptažodis neteisingas!");}
-//}
-//
-//if(jTextField1.getText().equals("Administratorius")) {
-//    if(password.equals(aPassword))
-//    {this.dispose();
-//        new Pagrindinis(null, true).show();
-//     }
-//    else {JOptionPane.showMessageDialog(null, "Slaptažodis neteisingas!");}
-//}
- this.dispose();
-   new Pagrindinis(null, true).show();
+if(jTextField1.getText().equals("Vadovas")) {
+    if(password.equals(vPassword))
+    { this.dispose();
+        new Pagrindinis(null, true).show();
+    }
+    else {JOptionPane.showMessageDialog(null, "Slaptažodis neteisingas!");}
+}
+
+if(jTextField1.getText().equals("Administratorius")) {
+    if(password.equals(aPassword))
+    {this.dispose();
+        new Pagrindinis(null, true).show();
+     }
+    else {JOptionPane.showMessageDialog(null, "Slaptažodis neteisingas!");}
+}
+ 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

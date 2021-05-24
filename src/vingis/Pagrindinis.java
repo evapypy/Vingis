@@ -858,7 +858,6 @@ int porosnr=0;
         jToggleButton4 = new javax.swing.JToggleButton();
         jToggleButton5 = new javax.swing.JToggleButton();
         jToggleButton6 = new javax.swing.JToggleButton();
-        jToggleButton7 = new javax.swing.JToggleButton();
         jToggleButton8 = new javax.swing.JToggleButton();
         jToggleButton9 = new javax.swing.JToggleButton();
         jToggleButton10 = new javax.swing.JToggleButton();
@@ -947,13 +946,6 @@ int porosnr=0;
             }
         });
 
-        jToggleButton7.setText("Kalendorius");
-        jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton7ActionPerformed(evt);
-            }
-        });
-
         jToggleButton8.setBackground(new java.awt.Color(255, 51, 51));
         jToggleButton8.setText("Trinti ryšius");
         jToggleButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -993,7 +985,6 @@ int porosnr=0;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                     .addComponent(jToggleButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jToggleButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jToggleButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1021,8 +1012,6 @@ int porosnr=0;
                 .addComponent(jToggleButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1314,16 +1303,16 @@ int porosnr=0;
     private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
 jToggleButton6.setSelected(false);
         //Button Finansai
-         
+          try {
+          
+               
+           
+              new Finansai(null, true).show();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Klaida!");
+        }
         
     }//GEN-LAST:event_jToggleButton6ActionPerformed
-
-    private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton7.setSelected(false);
-   
-        
-    }//GEN-LAST:event_jToggleButton7ActionPerformed
 
     private void Exit(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Exit
         // TODO add your handling code here:
@@ -3165,7 +3154,6 @@ ResultSet rs = st.executeQuery(sqlrequest);
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton jToggleButton5;
     private javax.swing.JToggleButton jToggleButton6;
-    private javax.swing.JToggleButton jToggleButton7;
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JToggleButton jToggleButton9;
     // End of variables declaration//GEN-END:variables
